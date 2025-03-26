@@ -15,7 +15,6 @@ function animateSatellite() {
     const satellite = document.getElementById('satellite');
     const spaceSection = document.getElementById('space-section');
     
-    satellite.style.top = '50%';
     satellite.style.left = '0';
     
     function orbit() {
@@ -32,8 +31,5 @@ function animateSatellite() {
     orbit();
 }
 
-// Run these functions when the page loads
-window.addEventListener('load', () => {
-    createStars();
-    animateSatellite();
-});
+createStars();
+animateSatellite();
