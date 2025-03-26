@@ -1,43 +1,38 @@
+<!-- styles.css -->
 html, body {
     margin: 0;
     padding: 0;
     overflow-x: hidden;
 }
-
 .parallax-section {
     height: 100vh;
     width: 100%;
     position: relative;
     overflow: hidden;
+    border-radius: 50% / 10%; /* Curved effect */
 }
-
 #space-section {
     background: linear-gradient(to bottom, #000000, #0a0a2a);
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
 }
-
 .star {
     position: absolute;
     background-color: white;
     border-radius: 50%;
 }
-
 #satellite {
     position: absolute;
     width: 50px;
     height: 20px;
     background-color: silver;
+    top: 20%;
 }
-
 #low-orbit {
     background-color: #4a4a4a;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
-
 #turbine {
     position: relative;
     width: 200px;
@@ -45,27 +40,27 @@ html, body {
     transform-origin: center;
     animation: spin 3s linear infinite;
 }
-
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
-
 #earth-surface {
     background: linear-gradient(to bottom, #2ecc71, #3498db);
+    position: relative;
 }
-
+.mountain {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 20%;
+    background: url('mountain.png') no-repeat center/cover;
+}
 #underground {
     background: linear-gradient(to bottom, #8B4513, #A0522D);
 }
-
 #earth-core {
     background: linear-gradient(to bottom, #8B0000, #600000);
 }
-
 #core-transition {
     background: linear-gradient(to bottom, #8B0000, #FFD700, #FFFFFF);
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
