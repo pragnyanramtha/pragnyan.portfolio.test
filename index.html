@@ -1,4 +1,3 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,7 +5,79 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pragnyan Ramtha's Earth Journey</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+        
+        .parallax-section {
+            height: 100vh;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        #space-section {
+            background: linear-gradient(to bottom, #000000, #0a0a2a);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .star {
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+        }
+        
+        #satellite {
+            position: absolute;
+            width: 50px;
+            height: 20px;
+            background-color: silver;
+        }
+        
+        #low-orbit {
+            background-color: #4a4a4a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        #turbine {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            transform-origin: center;
+            animation: spin 3s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        #earth-surface {
+            background: linear-gradient(to bottom, #2ecc71, #3498db);
+        }
+        
+        #underground {
+            background: linear-gradient(to bottom, #8B4513, #A0522D);
+        }
+        
+        #earth-core {
+            background: linear-gradient(to bottom, #8B0000, #600000);
+        }
+        
+        #core-transition {
+            background: linear-gradient(to bottom, #8B0000, #FFD700, #FFFFFF);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
 </head>
 <body>
     <div id="space-section" class="parallax-section">
@@ -17,8 +88,8 @@
     <div id="low-orbit" class="parallax-section">
         <div id="turbine" class="mx-auto">
             <svg viewBox="0 0 200 200">
-                <circle cx="100" cy="100" r="80" fill="gray" />
-                <path d="M100 20 L80 100 L100 180 L120 100 Z" fill="silver" />
+                <circle cx="100" cy="100" r="80" fill="#gray" />
+                <path d="M100 20 L80 100 L100 180 L120 100 Z" fill="#silver" />
             </svg>
         </div>
     </div>
@@ -27,7 +98,6 @@
         <div class="container mx-auto text-center">
             <h2 class="text-4xl text-white">Surface of the Earth</h2>
         </div>
-        <div class="mountain"></div>
     </div>
 
     <div id="underground" class="parallax-section">
@@ -48,6 +118,46 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        function createStars() {
+            const spaceSection = document.getElementById('space-section');
+            for (let i = 0; i < 100; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.width = `${Math.random() * 3}px`;
+                star.style.height = star.style.width;
+                spaceSection.appendChild(star);
+            }
+        }
+
+        function animateSatellite() {
+            const satellite = document.getElementById('satellite');
+            const spaceSection = document.getElementById('space-section');
+            
+            satellite.style.top = '50%';
+            satellite.style.left = '0';
+            
+            function orbit() {
+                satellite.animate([
+                    { transform: 'translateX(0) translateY(-50%) rotate(0deg)' },
+                    { transform: `translateX(${spaceSection.clientWidth}px) translateY(-50%) rotate(360deg)` }
+                ], {
+                    duration: 5000,
+                    iterations: Infinity,
+                    easing: 'linear'
+                });
+            }
+            
+            orbit();
+        }
+
+        // Run these functions when the page loads
+        window.addEventListener('load', () => {
+            createStars();
+            animateSatellite();
+        });
+    </script>
 </body>
 </html>
