@@ -77,12 +77,35 @@
             justify-content: center;
             align-items: center;
         }
+        
+        /* Layer dividers with parabolic arcs */
+        .layer-divider {
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            z-index: 10;
+            overflow: hidden;
+        }
+        
+        .layer-divider svg {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 100px;
+        }
     </style>
 </head>
 <body>
     <div id="space-section" class="parallax-section">
         <h1 class="text-6xl text-white font-bold text-center">THIS IS PRAGNYAN RAMTHA</h1>
         <div id="satellite"></div>
+        <div class="layer-divider">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100">
+                <path fill="#4a4a4a" d="M0,0 C720,100 1440,0 1440,0 L1440,100 L0,100 Z"></path>
+            </svg>
+        </div>
     </div>
 
     <div id="low-orbit" class="parallax-section">
@@ -92,11 +115,21 @@
                 <path d="M100 20 L80 100 L100 180 L120 100 Z" fill="#silver" />
             </svg>
         </div>
+        <div class="layer-divider">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100">
+                <path fill="#2ecc71" d="M0,0 C720,100 1440,0 1440,0 L1440,100 L0,100 Z"></path>
+            </svg>
+        </div>
     </div>
 
     <div id="earth-surface" class="parallax-section">
         <div class="container mx-auto text-center">
             <h2 class="text-4xl text-white">Surface of the Earth</h2>
+        </div>
+        <div class="layer-divider">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100">
+                <path fill="#8B4513" d="M0,0 C720,100 1440,0 1440,0 L1440,100 L0,100 Z"></path>
+            </svg>
         </div>
     </div>
 
@@ -104,11 +137,21 @@
         <div class="container mx-auto text-center">
             <h2 class="text-4xl text-white">Underground Mysteries</h2>
         </div>
+        <div class="layer-divider">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100">
+                <path fill="#8B0000" d="M0,0 C720,100 1440,0 1440,0 L1440,100 L0,100 Z"></path>
+            </svg>
+        </div>
     </div>
 
     <div id="earth-core" class="parallax-section">
         <div class="container mx-auto text-center">
             <h2 class="text-4xl text-white">Depths of the Earth</h2>
+        </div>
+        <div class="layer-divider">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100">
+                <path fill="#FFD700" d="M0,0 C720,100 1440,0 1440,0 L1440,100 L0,100 Z"></path>
+            </svg>
         </div>
     </div>
 
@@ -153,11 +196,35 @@
             orbit();
         }
 
+        // Add scroll-based effects
+        function handleScroll() {
+            const scrollPosition = window.scrollY;
+            const windowHeight = window.innerHeight;
+            
+            // Parallax effect for sections
+            document.querySelectorAll('.parallax-section').forEach((section, index) => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.offsetHeight;
+                
+                if (scrollPosition > sectionTop - windowHeight && 
+                    scrollPosition < sectionTop + sectionHeight) {
+                    const scrollPercentage = (scrollPosition - (sectionTop - windowHeight)) / 
+                                           (sectionHeight + windowHeight);
+                    
+                    // Apply subtle parallax effect
+                    section.style.backgroundPositionY = `${scrollPercentage * 50}px`;
+                }
+            });
+        }
+
         // Run these functions when the page loads
         window.addEventListener('load', () => {
             createStars();
             animateSatellite();
         });
+        
+        // Add scroll event listener
+        window.addEventListener('scroll', handleScroll);
     </script>
 </body>
 </html>
